@@ -141,6 +141,48 @@ curl -s -X GET \
 echo
 echo
 
+echo "POST instantiate chaincode on peer1 of Org1"
+echo
+curl -s -X POST \
+  http://localhost:4000/channels/mychannel/chaincodes \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"chaincodeName":"createdistribution",
+	"chaincodeVersion":"v0",
+	"args":["123456789012", "syb12345", "300", "0", ""]
+}'
+echo
+echo
+
+echo "POST invoke chaincode on peers of Org1 and Org2"
+echo
+TRX_ID=$(curl -s -X POST \
+  http://localhost:4000/channels/mychannel/chaincodes/createdistribution \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"fcn":"createDistribution",
+	"args":["123456789012", "syb12345", "300", "0", ""]
+}')
+echo "Transacton ID is $TRX_ID"
+echo
+echo
+
+echo "POST invoke chaincode on peers of Org1 and Org2"
+echo
+TRX_ID=$(curl -s -X POST \
+  http://localhost:4000/channels/mychannel/chaincodes/createdistribution \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"fcn":"getDistribution",
+	"args":["123456789012"]
+}')
+echo "Transacton ID is $TRX_ID"
+echo
+echo
+
 echo "GET query Block by blockNumber"
 echo
 curl -s -X GET \
