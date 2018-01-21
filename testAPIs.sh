@@ -141,7 +141,7 @@ curl -s -X GET \
 echo
 echo
 
-echo "POST instantiate chaincode on peer1 of Org1"
+echo "POST instantiate chaincode createdistribution on peer1 of Org1"
 echo
 curl -s -X POST \
   http://localhost:4000/channels/mychannel/chaincodes \
@@ -155,7 +155,7 @@ curl -s -X POST \
 echo
 echo
 
-echo "POST invoke chaincode on peers of Org1 and Org2"
+echo "POST invoke chaincode createdistribution to create a distribution on peers of Org1 and Org2"
 echo
 TRX_ID=$(curl -s -X POST \
   http://localhost:4000/channels/mychannel/chaincodes/createdistribution \
@@ -169,7 +169,7 @@ echo "Transacton ID is $TRX_ID"
 echo
 echo
 
-echo "POST invoke chaincode on peers of Org1 and Org2"
+echo "POST invoke chaincode createdistribution to get transaction on peers of Org1 and Org2"
 echo
 TRX_ID=$(curl -s -X POST \
   http://localhost:4000/channels/mychannel/chaincodes/createdistribution \
