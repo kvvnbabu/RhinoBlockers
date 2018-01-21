@@ -2,21 +2,19 @@ package main
 
 
 import (
-	"fmt"
-	"strconv"
-
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	sc "github.com/hyperledger/fabric/protos/peer"
 )
 
 var logger = shim.NewLogger("distributionsmartcontract")
 
 // Define the Smart Contract structure
 type SaplingDistributionSmartContract struct {
+	DistributionId  string `json:"distributionid"`
 	BeneficiaryId  string `json:"beneficiaryid"`
 	Land  string `json:"land"`
-	EligibleSaplings int `json:"eligiblesaplings"`
-	ActiveSaplings  int `json:"activesaplings"`
+	EligibleSaplings string `json:"eligiblesaplings"`
+	ActiveSaplings  string `json:"activesaplings"`
 	RfIds string `json:"rfids"`
 }
 
@@ -44,13 +42,13 @@ func (s *SaplingDistributionSmartContract) createDistribution(APIstub shim.Chain
 		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
 
-	var distribution = SaplingDistributionSmartContract{
+	var distribution = SaplingDistributionSmartContract {
 			DistributionId		:args[0],
 			BeneficiaryId  		:args[0],
 			Land  				:args[1],
 			EligibleSaplings 	:args[2],
 			ActiveSaplings  	:args[3],
-			RfId 				:args[4]
+			RfIds 				:args[4],
 	}
 
 	distributionAsBytes, _ := json.Marshal(distribution)
