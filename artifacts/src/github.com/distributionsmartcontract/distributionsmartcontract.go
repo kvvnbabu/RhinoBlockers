@@ -2,6 +2,7 @@ package main
 
 
 import (
+	"encoding/json"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
 )
@@ -68,12 +69,12 @@ func (s *SaplingDistributionSmartContract) queryDistribution(APIstub shim.Chainc
 	Avalbytes, err := APIstub.GetState(distributionId)
 
 	if err != nil {
-		jsonResp := "{\"Error\":\"Failed to get state for " + A + "\"}"
+		jsonResp := "{\"Error\":\"Failed to get state for " + distributionId + "\"}"
 		return shim.Error(jsonResp)
 	}
 
 	if Avalbytes == nil {
-		jsonResp := "{\"Error\":\"Nil amount for " + A + "\"}"
+		jsonResp := "{\"Error\":\"Nil amount for " + distributionId + "\"}"
 		return shim.Error(jsonResp)
 	}
 
