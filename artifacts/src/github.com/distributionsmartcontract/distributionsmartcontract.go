@@ -52,7 +52,7 @@ func (s *SaplingDistributionSmartContract) createDistribution(APIstub shim.Chain
 	}
 
 	distributionAsBytes, _ := json.Marshal(distribution)
-	APIstub.PutState(args[0], carAsBytes)
+	APIstub.PutState(args[0], distributionAsBytes)
 
 	return shim.Success(nil)
 }
@@ -62,10 +62,11 @@ func (s *SaplingDistributionSmartContract) queryDistribution(APIstub shim.Chainc
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
-
+	var err error
 	var distributionId = args[0]
 
-	APIstub.GetState(distributionId)
+	Avalbytes, err := APIstub.GetState(distributionId)
+
 	if err != nil {
 		jsonResp := "{\"Error\":\"Failed to get state for " + A + "\"}"
 		return shim.Error(jsonResp)
