@@ -4,7 +4,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-ORG1_TOKEN 
 
 function dkcl(){
         CONTAINER_IDS=$(docker ps -aq)
