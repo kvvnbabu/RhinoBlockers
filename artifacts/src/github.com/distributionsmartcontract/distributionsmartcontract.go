@@ -31,8 +31,7 @@ func (s *SaplingDistributionSmartContract) Invoke(APIstub shim.ChaincodeStubInte
 	// Route to the appropriate handler function to interact with the ledger appropriately
 	if function == "createDistribution" {
 		return s.createDistribution(APIstub, args)
-	}
-	else if function == "getDistribution"{
+	}else if function == "getDistribution"{
 		return s.queryDistribution(APIstub, args)
 	}
 
@@ -46,7 +45,7 @@ func (s *SaplingDistributionSmartContract) createDistribution(APIstub shim.Chain
 	}
 
 	var distribution = SaplingDistributionSmartContract{
-			DistributionId		:args[0]
+			DistributionId		:args[0],
 			BeneficiaryId  		:args[0],
 			Land  				:args[1],
 			EligibleSaplings 	:args[2],
